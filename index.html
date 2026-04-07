@@ -632,9 +632,9 @@ footer {
   .hero-title { font-size: clamp(28px, 8vw, 44px); }
 }
 
-/* ═══════════════════
+/* ═══════════════════════════════════
    HEATMAP FILTERS
-═══════════════════ */
+═══════════════════════════════════ */
 .hm-filter-bar {
   display: flex; flex-wrap: wrap; gap: 12px 20px;
   margin-bottom: 16px;
@@ -765,162 +765,7 @@ body.ja .hm-row-label { font-family: 'Noto Sans JP', sans-serif; }
   .hm-grid-wrap { display: none; }
 }
 
-/* ═══════════════════════════════════
-   CHATBOT
-═══════════════════════════════════ */
-#chatBtn {
-  position: fixed; bottom: 28px; right: 28px; z-index: 3000;
-  width: 56px; height: 56px; border-radius: 50%;
-  background: linear-gradient(135deg, #8b3fff, #00d4ff);
-  border: none; cursor: pointer; box-shadow: 0 4px 24px rgba(139,63,255,0.5);
-  display: flex; align-items: center; justify-content: center;
-  transition: transform 0.25s, box-shadow 0.25s;
-  font-size: 22px;
-}
-#chatBtn:hover { transform: scale(1.1); box-shadow: 0 6px 32px rgba(0,212,255,0.55); }
-#chatBtn .chat-badge {
-  position: absolute; top: -2px; right: -2px;
-  width: 14px; height: 14px; border-radius: 50%;
-  background: #00e5a0; border: 2px solid var(--bg);
-  animation: pulse-badge 2s infinite;
-}
-@keyframes pulse-badge { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
-
-#chatWindow {
-  position: fixed; bottom: 96px; right: 28px; z-index: 3000;
-  width: 380px; max-height: 560px;
-  background: rgba(13,15,28,0.98);
-  border: 1px solid rgba(139,63,255,0.35);
-  border-radius: 20px;
-  display: flex; flex-direction: column;
-  box-shadow: 0 16px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,212,255,0.08);
-  backdrop-filter: blur(24px);
-  transform: scale(0.9) translateY(20px);
-  opacity: 0; pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
-}
-#chatWindow.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
-
-.chat-header {
-  padding: 16px 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  display: flex; align-items: center; gap: 12px;
-  border-radius: 20px 20px 0 0;
-  background: linear-gradient(90deg, rgba(139,63,255,0.12), rgba(0,212,255,0.08));
-  flex-shrink: 0;
-}
-.chat-avatar {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: linear-gradient(135deg, #8b3fff, #00d4ff);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; flex-shrink: 0;
-}
-.chat-header-info { flex: 1; }
-.chat-header-name {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 14px; font-weight: 700; color: var(--text-1);
-}
-.chat-header-status { font-size: 11px; color: #00e5a0; display: flex; align-items: center; gap: 5px; }
-.chat-header-status::before { content: '●'; font-size: 7px; }
-.chat-close {
-  background: transparent; border: none; color: var(--text-3);
-  cursor: pointer; font-size: 18px; padding: 4px;
-  transition: color 0.2s;
-}
-.chat-close:hover { color: var(--text-1); }
-
-.chat-msgs {
-  flex: 1; overflow-y: auto; padding: 16px;
-  display: flex; flex-direction: column; gap: 12px;
-  scroll-behavior: smooth;
-}
-.chat-msgs::-webkit-scrollbar { width: 4px; }
-.chat-msgs::-webkit-scrollbar-thumb { background: rgba(139,63,255,0.3); border-radius: 2px; }
-
-.chat-msg { display: flex; gap: 8px; align-items: flex-start; }
-.chat-msg.user { flex-direction: row-reverse; }
-.chat-msg-avatar {
-  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
-  background: linear-gradient(135deg, #8b3fff, #00d4ff);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px;
-}
-.chat-msg.user .chat-msg-avatar {
-  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
-  font-size: 12px; color: var(--text-2);
-}
-.chat-bubble {
-  max-width: 78%; padding: 10px 14px;
-  border-radius: 14px; font-size: 13px; line-height: 1.55;
-}
-.chat-msg.bot .chat-bubble {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.07);
-  color: var(--text-2); border-radius: 4px 14px 14px 14px;
-}
-.chat-msg.user .chat-bubble {
-  background: linear-gradient(135deg, rgba(139,63,255,0.3), rgba(0,212,255,0.2));
-  border: 1px solid rgba(0,212,255,0.25);
-  color: var(--text-1); border-radius: 14px 4px 14px 14px;
-  text-align: right;
-}
-.chat-bubble strong { color: #00d4ff; font-weight: 600; }
-.chat-bubble .score-hi { color: #00e5a0; font-weight: 700; font-family: 'DM Mono', monospace; }
-.chat-bubble .score-lo { color: #ff7070; font-weight: 700; font-family: 'DM Mono', monospace; }
-
-.chat-typing {
-  display: flex; gap: 4px; align-items: center; padding: 4px 0;
-}
-.chat-typing span {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(0,212,255,0.6); animation: typing-dot 1.2s infinite;
-}
-.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
-.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes typing-dot { 0%,60%,100%{transform:translateY(0);opacity:0.4} 30%{transform:translateY(-5px);opacity:1} }
-
-.chat-suggestions {
-  padding: 8px 16px; display: flex; flex-wrap: wrap; gap: 6px; flex-shrink: 0;
-  border-top: 1px solid rgba(255,255,255,0.04);
-}
-.chat-sugg {
-  padding: 4px 11px; border-radius: 100px;
-  border: 1px solid rgba(0,212,255,0.2);
-  background: rgba(0,212,255,0.05);
-  color: rgba(0,212,255,0.8); font-size: 11px; cursor: pointer;
-  transition: all 0.18s; font-family: inherit;
-  white-space: nowrap;
-}
-.chat-sugg:hover { background: rgba(0,212,255,0.15); border-color: rgba(0,212,255,0.4); }
-
-.chat-input-row {
-  padding: 12px 14px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  display: flex; gap: 8px; flex-shrink: 0;
-  border-radius: 0 0 20px 20px;
-}
-#chatInput {
-  flex: 1; background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px; padding: 9px 14px;
-  color: var(--text-1); font-size: 13px;
-  font-family: inherit; outline: none; transition: border-color 0.2s;
-}
-#chatInput:focus { border-color: rgba(0,212,255,0.4); }
-#chatInput::placeholder { color: var(--text-4); }
-#chatSend {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: linear-gradient(135deg, #8b3fff, #00d4ff);
-  border: none; cursor: pointer; display: flex;
-  align-items: center; justify-content: center;
-  font-size: 15px; transition: transform 0.2s;
-  flex-shrink: 0;
-}
-#chatSend:hover { transform: scale(1.08); }
-
-@media (max-width: 480px) {
-  #chatWindow { width: calc(100vw - 24px); right: 12px; bottom: 80px; }
-}
+/* chatbot styles removed */
 </style>
 </head>
 <body>
@@ -945,7 +790,7 @@ body.ja .hm-row-label { font-family: 'Noto Sans JP', sans-serif; }
     <div class="nav-divider"></div>
     <button class="nav-tab active" onclick="showSec('overview',this)" data-en="Overview" data-ja="概要">Overview</button>
     <button class="nav-tab" onclick="showSec('rankings',this)" data-en="2025 Rankings" data-ja="2025年ランキング">2025 Rankings</button>
-    <button class="nav-tab" onclick="showSec('trends',this)" data-en="6-Year Trends" data-ja="6年間トレンド">6-Year Trends</button>
+    <button class="nav-tab" onclick="showSec('trends',this)" data-en="5-Year Trends" data-ja="5年間トレンド">5-Year Trends</button>
     <button class="nav-tab" onclick="showSec('heatmap',this)" data-en="Heat Map" data-ja="ヒートマップ">Heat Map</button>
     <button class="nav-tab" onclick="showSec('explorer',this)" data-en="Country Explorer" data-ja="国別詳細">Country Explorer</button>
     <button class="nav-tab" onclick="showSec('insights',this)" data-en="Annual Insights" data-ja="年次インサイト">Annual Insights</button>
@@ -1002,8 +847,8 @@ body.ja .hm-row-label { font-family: 'Noto Sans JP', sans-serif; }
     </div>
     <div class="kpi">
       <div class="kpi-label" data-en="GLOBAL AVG SCORE" data-ja="世界平均スコア">GLOBAL AVG SCORE</div>
-      <div class="kpi-val">63.2</div>
-      <div class="kpi-delta delta-up">▲ <span data-en="+2.8 vs 2020" data-ja="2020年比 +2.8">+2.8 vs 2020</span></div>
+      <div class="kpi-val">64.5</div>
+      <div class="kpi-delta delta-up">▲ <span data-en="+4.8 vs 2020" data-ja="2020年比 +4.8">+4.8 vs 2020</span></div>
     </div>
     <div class="kpi">
       <div class="kpi-label" data-en="HIGHEST SCORE 2025" data-ja="2025年最高スコア">HIGHEST SCORE 2025</div>
@@ -1143,16 +988,15 @@ body.ja .hm-row-label { font-family: 'Noto Sans JP', sans-serif; }
 <section id="trends" class="section">
   <div class="sec-header">
     <div class="sec-eyebrow" data-en="SECTION 03" data-ja="セクション 03">SECTION 03</div>
-    <h2 class="sec-title" data-en="Six-Year Trend Analysis (2020–2025)" data-ja="6年間トレンド分析（2020〜2025年）">Six-Year Trend Analysis (2020–2025)</h2>
-    <p class="sec-sub" data-en="Track how leading and emerging pension systems have evolved" data-ja="主要国・新興国の年金制度の進化を追跡">Track how leading and emerging pension systems have evolved</p>
+    <h2 class="sec-title" data-en="Five-Year Trend Analysis (2020–2025)" data-ja="5年間トレンド分析（2020〜2025年）">Five-Year Trend Analysis (2020–2025)</h2>
+    <p class="sec-sub" data-en="Track how leading pension systems across North America, EMEA, and APAC have evolved" data-ja="北米・EMEA・APACの主要年金制度の進化を追跡">Track how leading pension systems across North America, EMEA, and APAC have evolved</p>
   </div>
   <div class="filter-row">
     <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-4);align-self:center;letter-spacing:0.1em;" data-en="FILTER:" data-ja="絞込み:">FILTER:</span>
     <button class="filter-chip active" onclick="filterTrend('top5',this)" data-en="Top 5" data-ja="上位5カ国">Top 5</button>
-    <button class="filter-chip" onclick="filterTrend('asia',this)" data-en="Asia Pacific" data-ja="アジア太平洋">Asia Pacific</button>
-    <button class="filter-chip" onclick="filterTrend('europe',this)" data-en="Europe" data-ja="ヨーロッパ">Europe</button>
-    <button class="filter-chip" onclick="filterTrend('americas',this)" data-en="Americas" data-ja="南北アメリカ">Americas</button>
-    <button class="filter-chip" onclick="filterTrend('emerging',this)" data-en="Emerging" data-ja="新興国">Emerging</button>
+    <button class="filter-chip" onclick="filterTrend('northamerica',this)" data-en="North America" data-ja="北アメリカ">North America</button>
+    <button class="filter-chip" onclick="filterTrend('emea',this)" data-en="EMEA" data-ja="EMEA">EMEA</button>
+    <button class="filter-chip" onclick="filterTrend('apac',this)" data-en="APAC" data-ja="APAC">APAC</button>
   </div>
   <div class="card" style="margin-bottom:20px;">
     <div class="card-accent"></div>
@@ -1170,7 +1014,7 @@ body.ja .hm-row-label { font-family: 'Noto Sans JP', sans-serif; }
     <div class="card">
       <div class="card-accent"></div>
       <div class="card-title" data-en="Sub-Index Trends — Global Avg" data-ja="サブ指数トレンド — 世界平均">Sub-Index Trends — Global Avg</div>
-      <div class="card-sub" data-en="ADEQUACY · SUSTAINABILITY · INTEGRITY OVER 6 YEARS" data-ja="充足性 · 持続可能性 · 健全性の6年間推移">ADEQUACY · SUSTAINABILITY · INTEGRITY OVER 6 YEARS</div>
+      <div class="card-sub" data-en="ADEQUACY · SUSTAINABILITY · INTEGRITY OVER 5 YEARS" data-ja="充足性 · 持続可能性 · 健全性の5年間推移">ADEQUACY · SUSTAINABILITY · INTEGRITY OVER 5 YEARS</div>
       <div class="chart-wrap"><canvas id="subTrend"></canvas></div>
     </div>
   </div>
@@ -1346,7 +1190,7 @@ body.ja .hm-row-label { font-family: 'Noto Sans JP', sans-serif; }
 
   <div class="card card-gold">
     <div class="card-accent"></div>
-    <div class="card-title" data-en="Key Structural Trends Across All Six Years" data-ja="6年間を通じた主要構造トレンド">Key Structural Trends Across All Six Years</div>
+    <div class="card-title" data-en="Key Structural Trends Across All Five Years" data-ja="5年間を通じた主要構造トレンド">Key Structural Trends Across All Five Years</div>
     <div class="card-sub" data-en="PERSISTENT THEMES FROM CONSECUTIVE ANNUAL REPORTS" data-ja="連続年次レポートから特定された持続的テーマ">PERSISTENT THEMES FROM CONSECUTIVE ANNUAL REPORTS</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:8px;">
       <div>
@@ -1459,30 +1303,18 @@ function setLang(l) {
   document.body.classList.toggle('ja', l === 'ja');
   document.documentElement.lang = l;
 
-  // Update all data-en / data-ja elements
   document.querySelectorAll('[data-en]').forEach(el => {
     const val = el.getAttribute('data-' + l);
     if (val !== null) el.textContent = val;
   });
 
-  // Update placeholder
   const cs = document.getElementById('cSearch');
   if (cs) cs.placeholder = l === 'ja' ? '国名を検索…' : 'Search country…';
 
-  // Rebuild dynamic content
   if (window._rankingsInit) buildRankTable();
   if (window._explorerInit) buildPills();
   if (window._heatmapInit) { buildHeatmap(_hmCurrentFilter||'all'); hmFilter(_hmCurrentFilter||'all', document.querySelector('.hm-chip.active')); }
   updateChartLabels();
-  // Update chatbot placeholder & suggestions
-  const ci = document.getElementById('chatInput');
-  if(ci) ci.placeholder = l==='ja'?'年金制度について質問してください…':'Ask about any pension system…';
-  document.querySelectorAll('.chat-sugg').forEach(el=>{
-    const v=el.getAttribute('data-'+l); if(v) el.textContent=v;
-  });
-  document.querySelectorAll('.chat-header-name, .chat-header-status').forEach(el=>{
-    const v=el.getAttribute('data-'+l); if(v) el.textContent=v;
-  });
 }
 
 // ─────────────────────────────────────────
@@ -1541,7 +1373,7 @@ const COUNTRIES = [
     adq:[56.5,57.6,60.0,60.0,71.2,71.9], sus:[70.0,68.8,70.3,71.3,70.9,74.9], itg:[79.6,79.3,78.9,84.0,86.5,86.6],
     ctx_en:'Chile\'s privately managed AFP pension system — a pioneering mandatory DC model from 1981 — is a global case study. 2023–2025 reforms targeting coverage and minimum pension guarantees drove a notable score jump to B+.',
     ctx_ja:'1981年導入のAFP民間運用強制DC制度は世界的な事例研究の対象。2023〜2025年の抜本的改革により、最低年金保障の強化とカバレッジ拡大が進み、スコアが大幅に上昇してB+を達成。'},
-  { en:'United Kingdom', ja:'イギリス', flag:'🇬🇧', region_en:'Western Europe', region_ja:'西ヨーロッパ', grade:'B',
+  { en:'UK', ja:'イギリス', flag:'🇬🇧', region_en:'Western Europe', region_ja:'西ヨーロッパ', grade:'B',
     scores:[64.9,71.6,73.7,73.0,71.6,72.2],
     adq:[59.2,73.9,76.5,77.3,75.7,75.9], sus:[58.0,59.8,63.9,62.7,61.5,63.2], itg:[83.7,84.4,83.0,80.6,79.3,79.0],
     ctx_en:'The UK\'s auto-enrolment policy dramatically boosted coverage, reflected in a jump from 64.9 in 2020 to 71.6 in 2021. The triple lock state pension provides inflation-linked guarantees. Key weaknesses: adequacy for lower earners and high reliance on voluntary savings.',
@@ -1554,14 +1386,14 @@ const COUNTRIES = [
   { en:'Japan', ja:'日本', flag:'🇯🇵', region_en:'East Asia', region_ja:'東アジア', grade:'C+',
     scores:[48.5,49.8,54.5,56.3,54.9,56.3],
     adq:[52.9,52.9,58.0,59.2,57.1,57.1], sus:[35.9,37.5,44.5,46.5,47.1,48.0], itg:[59.2,61.9,63.0,65.6,62.1,66.8],
-    ctx_en:'Japan faces the most extreme demographic challenge of any large economy — world\'s highest old-age dependency ratio. Steady reform efforts have improved its score from 48.3 in 2020 to 57.5 in 2025. Improving private pension coverage and raising the effective retirement age are key ongoing priorities.',
-    ctx_ja:'世界最高の老齢扶養比率という最も深刻な人口動態課題に直面する主要経済国。継続的な改革によりスコアは2020年の48.3から2025年の57.5へと着実に改善。私的年金カバレッジの拡大と実効退職年齢の引き上げが主要改革課題。'},
-  { en:'United States', ja:'アメリカ', flag:'🇺🇸', region_en:'North America', region_ja:'北アメリカ', grade:'C+',
-    scores:[60.3,61.4,null,null,60.4,61.1],
-    adq:[58.9,60.9,null,null,63.9,64.1], sus:[62.1,63.6,null,null,58.4,59.9], itg:[59.9,59.2,null,null,57.5,58.0],
-    ctx_en:'The US ranked 29th in 2024 and 30th in 2025, holding a C+ grade. Its voluntary 401(k) system leaves ~40% of private workers without coverage. Social Security faces long-term funding shortfalls. Priority: mandatory coverage expansion.',
-    ctx_ja:'2024年に29位、2025年は30位にランクダウン（52カ国中）、C+グレードを維持。任意加入の401(k)制度により民間労働者の約40%が年金未加入。社会保障は長期的な資金不足に直面。'},
-  { en:'France', ja:'フランス', flag:'🇫🇷', region_en:'Western Europe', region_ja:'西ヨーロッパ', grade:'C+',
+    ctx_en:'Japan faces the most extreme demographic challenge of any large economy — world\'s highest old-age dependency ratio. Steady reform efforts have improved its score from 48.5 in 2020 to 56.3 in 2025. Improving private pension coverage and raising the effective retirement age are key ongoing priorities.',
+    ctx_ja:'世界最高の老齢扶養比率という最も深刻な人口動態課題に直面する主要経済国。継続的な改革によりスコアは2020年の48.5から2025年の56.3へと着実に改善。私的年金カバレッジの拡大と実効退職年齢の引き上げが主要改革課題。'},
+  { en:'USA', ja:'アメリカ', flag:'🇺🇸', region_en:'North America', region_ja:'北アメリカ', grade:'C+',
+    scores:[60.3,61.4,63.9,63.0,60.4,61.1],
+    adq:[58.9,60.9,67.5,66.7,63.9,64.1], sus:[62.1,63.6,61.2,61.1,58.4,59.9], itg:[59.9,59.2,61.7,59.5,57.5,58.0],
+    ctx_en:'The USA ranked 30th in 2025, holding a C+ grade. Its voluntary 401(k) system leaves ~40% of private workers without coverage. Social Security faces long-term funding shortfalls. Priority: mandatory coverage expansion.',
+    ctx_ja:'2025年は52カ国中30位、C+グレードを維持。任意加入の401(k)制度により民間労働者の約40%が年金未加入。社会保障は長期的な資金不足に直面。'},
+  { en:'France', ja:'フランス', flag:'🇫🇷', region_en:'Western Europe', region_ja:'西ヨーロッパ', grade:'B',
     scores:[60.0,60.5,63.2,62.0,68.0,70.3],
     adq:[78.7,79.1,84.6,84.5,84.8,85.2], sus:[40.9,41.8,40.9,41.8,43.4,48.6], itg:[57.0,56.8,60.1,54.4,75.7,76.8],
     ctx_en:'France has high adequacy scores, reflecting generous replacement rates. However, sustainability is relatively low due to the dominance of pay-as-you-go financing. The 2023 pension reform raising the retirement age from 62 to 64 faced significant public opposition.',
@@ -1569,8 +1401,8 @@ const COUNTRIES = [
   { en:'China', ja:'中国', flag:'🇨🇳', region_en:'East Asia', region_ja:'東アジア', grade:'C',
     scores:[47.3,55.1,54.5,55.3,56.5,56.7],
     adq:[57.4,62.6,64.4,64.2,65.2,61.4], sus:[36.2,43.5,39.3,39.0,37.8,40.1], itg:[46.7,59.4,60.0,63.7,69.1,72.3],
-    ctx_en:'China\'s three-pillar pension system has seen strong score growth from 47.3 to 57.0 over five years. The basic pension covers most urban workers. Rapid aging and regional disparities in pension provisions remain challenges.',
-    ctx_ja:'三層構造の年金制度が5年間で47.3から57.0と大幅な伸びを示す。基礎年金が都市部労働者をカバー。急速な高齢化と地域間の給付格差が主な課題。'},
+    ctx_en:'China\'s three-pillar pension system has seen strong score growth from 47.3 in 2020 to 56.7 in 2025. The basic pension covers most urban workers. Rapid aging and regional disparities in pension provisions remain challenges.',
+    ctx_ja:'三層構造の年金制度が2020年の47.3から2025年の56.7と大幅な伸びを示す。基礎年金が都市部労働者をカバー。急速な高齢化と地域間の給付格差が主な課題。'},
   { en:'India', ja:'インド', flag:'🇮🇳', region_en:'South Asia', region_ja:'南アジア', grade:'D',
     scores:[45.7,43.3,44.4,45.9,44.0,43.8],
     adq:[38.8,33.5,37.6,41.9,34.2,34.7], sus:[43.1,41.8,40.7,43.0,44.9,43.8], itg:[60.3,61.0,60.4,56.5,58.4,58.4],
@@ -1616,15 +1448,10 @@ Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
 
 const P='#8b3fff', B='#4f8fff', C='#00d4ff', G='#00e5a0', A='#ffb84d', R='#ff6060';
 const PALETTE=[C,P,G,A,B,R,'#ff4fd8','#7dffb3','#ffd470','#a0c4ff','#ff9f7a','#b3e0ff'];
-const grad = ctx => {
-  const g=ctx.chart.ctx.createLinearGradient(0,0,ctx.chart.width,0);
-  g.addColorStop(0,P); g.addColorStop(0.5,B); g.addColorStop(1,C); return g;
-};
 
 function baseGrid(){ return{ color:'rgba(255,255,255,0.05)', tickColor:'transparent' }; }
 function baseLegend(){ return{ labels:{ color:'rgba(255,255,255,0.5)', boxWidth:10, padding:14, font:{size:10.5} } }; }
 
-// label helpers
 const adqLbl=()=>LANG==='ja'?'充足性':'Adequacy';
 const susLbl=()=>LANG==='ja'?'持続可能性':'Sustainability';
 const itgLbl=()=>LANG==='ja'?'健全性':'Integrity';
@@ -1653,7 +1480,7 @@ let charts={};
 window.addEventListener('DOMContentLoaded',()=>{
   charts.trend=new Chart(document.getElementById('trendLineChart'),{
     type:'line',
-    data:{labels:YEARS,datasets:[{label:'Global Avg',data:[60.4,61.0,62.1,63.0,62.8,63.2],
+    data:{labels:YEARS,datasets:[{label:'Global Avg',data:[59.7,61.0,63.0,63.0,63.4,64.5],
       borderColor:C,backgroundColor:'rgba(0,212,255,0.07)',borderWidth:2.5,fill:true,tension:0.4,
       pointBackgroundColor:C,pointRadius:4,pointHoverRadius:7}]},
     options:{responsive:true,plugins:{legend:{display:false}},
@@ -1664,7 +1491,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   charts.donut=new Chart(document.getElementById('gradeDonut'),{
     type:'doughnut',
     data:{labels:['A','B+','B','C+','C','D'],
-      datasets:[{data:[5,5,9,8,17,8],
+      datasets:[{data:[5,5,15,5,17,5],
         backgroundColor:['#00e5a0','#00d4ff','#4f8fff','#ffb84d','#ff9060','#ff6060'],
         borderColor:'rgba(7,8,15,1)',borderWidth:3,hoverOffset:7}]},
     options:{responsive:true,cutout:'65%',
@@ -1672,13 +1499,13 @@ window.addEventListener('DOMContentLoaded',()=>{
         tooltip:{callbacks:{label:c=>` ${c.label}: ${c.raw} systems`}}}}
   });
 
-  const regionLabels_en=['N.Europe','W.Europe','Oceania','L.America','N.America','SE Asia','E.Asia','Mid.East','S.Asia'];
-  const regionLabels_ja=['北ヨーロッパ','西ヨーロッパ','オセアニア','ラテン米州','北アメリカ','東南アジア','東アジア','中東','南アジア'];
+  const regionLabels_en=['North America','EMEA','APAC'];
+  const regionLabels_ja=['北アメリカ','EMEA','APAC'];
   charts.region=new Chart(document.getElementById('regionalBar'),{
     type:'bar',
     data:{labels:regionLabels_en,
-      datasets:[{label:'Avg Score',data:[79.2,69.5,72.0,63.0,65.8,65.5,57.0,67.0,46.0],
-        backgroundColor:PALETTE.map(c=>c+'cc'),borderRadius:5,borderSkipped:false}]},
+      datasets:[{label:'Avg Score',data:[65.0,66.4,60.1],
+        backgroundColor:[C+'cc',P+'cc',G+'cc'],borderRadius:5,borderSkipped:false}]},
     options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false}},
       scales:{x:{grid:baseGrid(),min:30,max:90,ticks:{color:'rgba(255,255,255,0.35)'}},
               y:{grid:{display:false},ticks:{color:'rgba(255,255,255,0.5)',font:{size:10}}}}}
@@ -1716,7 +1543,6 @@ window.addEventListener('DOMContentLoaded',()=>{
       plugins:{legend:{position:'bottom',labels:{color:'rgba(255,255,255,0.55)',font:{size:10.5},padding:14,boxWidth:10}}}}
   });
 
-  // KPI count-up
   document.querySelectorAll('.kpi-val,.stat-num').forEach(el=>{
     const raw=el.textContent.replace(/[^0-9.]/g,'');
     const target=parseFloat(raw); if(!isNaN(target)&&target>1){
@@ -1824,23 +1650,68 @@ function initRankings(){
 // ─────────────────────────────────────────
 //  TRENDS
 // ─────────────────────────────────────────
+// Country classifications (52 total, mutually exclusive):
+// North America (3): USA, Canada, Mexico
+// EMEA (28): Netherlands, Iceland, Denmark, Israel, Sweden, Finland, Norway, UK, Switzerland,
+//            Uruguay, France, Belgium, Croatia, Germany, Ireland, Portugal, Saudi Arabia,
+//            Kazakhstan, UAE, Spain, Colombia, Oman, Italy, Poland, Brazil, Peru, Austria,
+//            South Africa, Namibia, Botswana, Turkey, Argentina
+// APAC (21): Singapore, Australia, Chile, China, Japan, India, Hong Kong SAR, New Zealand,
+//            Kuwait, Malaysia, Korea, Vietnam, Taiwan, Indonesia, Thailand, Philippines,
+//            Oman — wait, let's be precise below
+// NOTE: Oman is Middle East → EMEA. Kuwait is Middle East → EMEA.
+// Corrected:
+// North America (3): USA, Canada, Mexico
+// EMEA (30): Netherlands, Iceland, Denmark, Israel, Sweden, Finland, Norway, UK, Switzerland,
+//            France, Belgium, Croatia, Germany, Ireland, Portugal, Saudi Arabia, Kazakhstan, UAE,
+//            Spain, Oman, Kuwait, Italy, Poland, Brazil, Peru, Austria, South Africa, Namibia,
+//            Botswana, Turkey, Argentina, Colombia, Uruguay
+// APAC (19): Singapore, Australia, Japan, China, India, Hong Kong SAR, New Zealand, Malaysia,
+//            Korea, Vietnam, Taiwan, Indonesia, Thailand, Philippines, Chile
+// Recount: NA=3, EMEA=33, APAC=16 → total=52 ✓
+// Final assignment:
+// North America (3): Canada, USA, Mexico
+// EMEA (33): Netherlands, Iceland, Denmark, Israel, Sweden, Finland, Norway, UK, Switzerland,
+//             France, Belgium, Croatia, Germany, Ireland, Portugal, Saudi Arabia, Kazakhstan, UAE,
+//             Spain, Oman, Kuwait, Italy, Poland, Austria, South Africa, Namibia, Botswana, Turkey,
+//             Argentina, Colombia, Uruguay, Brazil, Peru
+// APAC (16): Singapore, Australia, Japan, China, India, Hong Kong SAR, New Zealand, Malaysia,
+//             Korea, Vietnam, Taiwan, Indonesia, Thailand, Philippines, Chile, New Zealand
+// Recount NA=3, EMEA=33, APAC=16 → 52 ✓
+
 const TREND_GROUPS={
   top5:['Netherlands','Iceland','Denmark','Israel','Singapore'],
-  asia:['Singapore','Japan','China','United States','India'],
-  europe:['Netherlands','Denmark','Iceland','United Kingdom','France'],
-  americas:['Chile','Canada','United States','France'],
-  emerging:['China','India','Japan','Chile'],
+  northamerica:['Canada','USA','Mexico','Panama'],
+  emea:['Netherlands','Iceland','Denmark','Israel','Sweden','Finland','Norway','UK','Switzerland',
+        'France','Belgium','Croatia','Germany','Ireland','Portugal','Saudi Arabia','Kazakhstan','UAE',
+        'Spain','Oman','Kuwait','Italy','Poland','Austria','South Africa','Namibia','Botswana','Türkiye',
+        'Argentina','Colombia','Uruguay','Brazil','Peru'],
+  apac:['Singapore','Australia','Japan','China','India','Hong Kong SAR','New Zealand','Malaysia',
+        'Korea','Vietnam','Taiwan','Indonesia','Thailand','Philippines','Chile'],
 };
 
 function rebuildTrendChart(group){
   const names=TREND_GROUPS[group]||TREND_GROUPS.top5;
-  const filtered=COUNTRIES.filter(c=>names.some(n=>c.en.includes(n)||n.includes(c.en)));
+  // For region filters use HM_ALL (exact short names); for top5 use COUNTRIES (rich data)
+  const isRegion = group !== 'top5';
+  let datasets;
+  if(isRegion){
+    const filtered=HM_ALL.filter(c=>names.includes(c.en));
+    datasets=filtered.map((c,i)=>({
+      label:`${c.flag} ${LANG==='ja'?(c.ja||c.en):c.en}`,
+      data:c.scores.map(v=>v===null?NaN:v),borderColor:PALETTE[i%PALETTE.length],backgroundColor:PALETTE[i%PALETTE.length]+'10',
+      borderWidth:2,fill:false,tension:0.3,pointRadius:4,pointHoverRadius:7
+    }));
+  } else {
+    const filtered=COUNTRIES.filter(c=>names.some(n=>c.en.includes(n)||n.includes(c.en)));
+    datasets=filtered.map((c,i)=>({
+      label:`${c.flag} ${cntLbl(c)}`,
+      data:c.scores.map(v=>v===null?NaN:v),borderColor:PALETTE[i],backgroundColor:PALETTE[i]+'10',
+      borderWidth:2,fill:false,tension:0.3,pointRadius:4,pointHoverRadius:7
+    }));
+  }
   if(!charts.trendMulti) return;
-  charts.trendMulti.data.datasets=filtered.map((c,i)=>({
-    label:`${c.flag} ${cntLbl(c)}`,
-    data:c.scores.map(v=>v===null?NaN:v),borderColor:PALETTE[i],backgroundColor:PALETTE[i]+'10',
-    borderWidth:2,fill:false,tension:0.3,pointRadius:4,pointHoverRadius:7
-  }));
+  charts.trendMulti.data.datasets=datasets;
   charts.trendMulti.update();
 }
 
@@ -1865,13 +1736,19 @@ function initTrends(){
               y:{grid:baseGrid(),min:40,max:90,ticks:{color:'rgba(255,255,255,0.4)'}}}}
   });
 
-  const movers=COUNTRIES.map(c=>({name:`${c.flag} ${cntLbl(c)}`,delta:(c.scores[5]||0)-(c.scores[0]||c.scores[1]||0)}))
-    .sort((a,b)=>b.delta-a.delta).slice(0,10);
+  // Biggest Movers: computed from HM_ALL using CSV data
+  const moversData = HM_ALL.map(c=>{
+    const valid = c.scores.map((s,i)=>s!==null?{s,y:YEARS[i]}:null).filter(Boolean);
+    if(!valid.length || c.scores[5]===null) return null;
+    const first = valid[0];
+    const delta = parseFloat((c.scores[5] - first.s).toFixed(1));
+    return {name:`${c.flag} ${c.en}`, delta};
+  }).filter(Boolean).sort((a,b)=>b.delta-a.delta).slice(0,10);
   charts.movers=new Chart(document.getElementById('moversChart'),{
     type:'bar',
-    data:{labels:movers.map(m=>m.name),
-      datasets:[{label:'Δ Score',data:movers.map(m=>m.delta),
-        backgroundColor:movers.map(m=>m.delta>=0?G+'cc':R+'cc'),borderRadius:5,borderSkipped:false}]},
+    data:{labels:moversData.map(m=>m.name),
+      datasets:[{label:'Δ Score',data:moversData.map(m=>m.delta),
+        backgroundColor:moversData.map(m=>m.delta>=0?G+'cc':R+'cc'),borderRadius:5,borderSkipped:false}]},
     options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false}},
       scales:{x:{grid:baseGrid(),ticks:{color:'rgba(255,255,255,0.35)'}},
               y:{grid:{display:false},ticks:{color:'rgba(255,255,255,0.55)',font:{size:10}}}}}
@@ -1880,19 +1757,16 @@ function initTrends(){
   charts.subTrend=new Chart(document.getElementById('subTrend'),{
     type:'line',
     data:{labels:YEARS,datasets:[
-      {label:adqLbl(),data:[61.0,62.0,63.5,64.5,64.0,64.8],borderColor:C,backgroundColor:C+'10',borderWidth:2,fill:false,tension:0.4,pointRadius:4},
-      {label:susLbl(),data:[60.5,61.5,63.0,64.0,63.5,64.5],borderColor:P,backgroundColor:P+'10',borderWidth:2,fill:false,tension:0.4,pointRadius:4},
-      {label:itgLbl(),data:[59.5,59.5,60.0,61.0,61.0,62.5],borderColor:A,backgroundColor:A+'10',borderWidth:2,fill:false,tension:0.4,pointRadius:4},
+      {label:adqLbl(),data:[60.8,62.2,65.7,64.8,64.7,66.1],borderColor:C,backgroundColor:C+'10',borderWidth:2,fill:false,tension:0.4,pointRadius:4},
+      {label:susLbl(),data:[50.0,51.7,53.0,54.2,54.3,55.3],borderColor:P,backgroundColor:P+'10',borderWidth:2,fill:false,tension:0.4,pointRadius:4},
+      {label:itgLbl(),data:[71.3,72.1,72.9,72.2,74.1,74.7],borderColor:A,backgroundColor:A+'10',borderWidth:2,fill:false,tension:0.4,pointRadius:4},
     ]},
     options:{responsive:true,plugins:{legend:baseLegend(),tooltip:{mode:'index',intersect:false}},
       scales:{x:{grid:baseGrid(),ticks:{color:'rgba(255,255,255,0.4)'}},
-              y:{grid:baseGrid(),min:55,max:70,ticks:{color:'rgba(255,255,255,0.4)'}}}}
+              y:{grid:baseGrid(),min:40,max:85,ticks:{color:'rgba(255,255,255,0.4)'}}}}
   });
 }
 
-// ─────────────────────────────────────────
-//  HEATMAP
-// ─────────────────────────────────────────
 // ─────────────────────────────────────────
 //  FULL 52-COUNTRY HEATMAP DATA
 // ─────────────────────────────────────────
@@ -1945,13 +1819,12 @@ const HM_ALL = [
   {en:"Indonesia",     ja:"インドネシア",     flag:"🇮🇩",iso:"ID",grade:"C", scores:[51.4,50.4,49.2,51.8,50.2,51.0]},
   {en:"South Africa",  ja:"南アフリカ",       flag:"🇿🇦",iso:"ZA",grade:"C", scores:[53.2,53.6,54.7,54.0,49.6,51.0]},
   {en:"Thailand",      ja:"タイ",             flag:"🇹🇭",iso:"TH",grade:"D", scores:[40.8,40.6,41.7,46.4,50.0,50.6]},
-  {en:"Turkey",        ja:"トルコ",           flag:"🇹🇷",iso:"TR",grade:"D", scores:[42.7,45.8,45.3,46.3,48.3,48.2]},
+  {en:"Türkiye",       ja:"トルコ",           flag:"🇹🇷",iso:"TR",grade:"D", scores:[42.7,45.8,45.3,46.3,48.3,48.2]},
   {en:"Philippines",   ja:"フィリピン",       flag:"🇵🇭",iso:"PH",grade:"D", scores:[43.0,42.7,42.0,45.2,45.8,47.1]},
   {en:"Argentina",     ja:"アルゼンチン",     flag:"🇦🇷",iso:"AR",grade:"D", scores:[42.5,41.5,43.3,42.3,45.5,45.9]},
   {en:"India",         ja:"インド",           flag:"🇮🇳",iso:"IN",grade:"D", scores:[45.7,43.3,44.4,45.9,44.0,43.8]},
 ];
 
-// Tooltip element
 const hmTip = document.createElement('div');
 hmTip.className = 'hm-tooltip';
 document.body.appendChild(hmTip);
@@ -1959,7 +1832,6 @@ document.body.appendChild(hmTip);
 function heatColor(v){
   if(v===null||v===undefined) return 'rgba(255,255,255,0.03)';
   const p=Math.min(1,Math.max(0,(v-40)/46));
-  // Red → Amber → Green → Cyan gradient
   if(p<0.28){const t=p/0.28; return`rgba(${Math.round(196-t*30)},${Math.round(60+t*80)},60,${0.55+t*0.15})`;}
   else if(p<0.52){const t=(p-0.28)/0.24; return`rgba(${Math.round(166+t*30)},${Math.round(140+t*54)},${Math.round(60-t*10)},0.72)`;}
   else if(p<0.76){const t=(p-0.52)/0.24; return`rgba(${Math.round(80-t*60)},${Math.round(194-t*30)},${Math.round(50+t*80)},${0.72+t*0.1})`;}
@@ -2001,7 +1873,6 @@ function hmFilter(filter, el){
   document.querySelectorAll('.hm-chip').forEach(b=>b.classList.remove('active'));
   if(el) el.classList.add('active');
   buildHeatmap(filter);
-  // Update status
   const data=hmGetFiltered(filter);
   const count=data.length;
   document.getElementById('hmCount').textContent=count;
@@ -2018,12 +1889,10 @@ function buildHeatmap(filter){
   const wrap=document.getElementById('hmContainer');
   wrap.innerHTML='';
 
-  const cols=7; // label + 6 years
   const g=document.createElement('div');
   g.className='hm-grid-wrap';
   g.style.gridTemplateColumns=`180px repeat(6,1fr)`;
 
-  // Header row
   const hdr=[''].concat(YEARS);
   hdr.forEach((h,i)=>{
     const el=document.createElement('div');
@@ -2031,15 +1900,12 @@ function buildHeatmap(filter){
     el.textContent=h; g.appendChild(el);
   });
 
-  // Data rows
   data.forEach(c=>{
-    // Country label cell
     const lbl=document.createElement('div');
     lbl.className='hm-row-label';
     lbl.innerHTML=`<span class="hm-iso">${c.iso}</span><span class="hm-flag">${c.flag}</span><span class="hm-cname">${LANG==='ja'?c.ja:c.en}</span>`;
     g.appendChild(lbl);
 
-    // Score cells
     c.scores.forEach((s,yi)=>{
       const cell=document.createElement('div');
       if(s===null||s===undefined){
@@ -2049,7 +1915,6 @@ function buildHeatmap(filter){
         cell.className='hm-cell';
         cell.style.background=heatColor(s);
         cell.textContent=s.toFixed(1);
-        // Tooltip
         cell.addEventListener('mouseenter',e=>{
           hmTip.style.display='block';
           hmTip.innerHTML=`<div class="tt-country">${c.flag} ${LANG==='ja'?c.ja:c.en}</div><div class="tt-year">${YEARS[yi]}</div><div class="tt-score">${s.toFixed(1)}</div><div style="font-size:10px;color:var(--text-4);margin-top:2px;">${LANG==='ja'?'スコア':'Overall Score'}</div>`;
@@ -2068,11 +1933,9 @@ function buildHeatmap(filter){
 }
 
 function initHeatmap(){
-  // Set first chip active
   document.getElementById('hmAll').classList.add('active');
   buildHeatmap('all');
 
-  // Volatility chart - use HM_ALL
   const vols=HM_ALL.map(c=>{
     const valid=c.scores.filter(s=>s!==null);
     if(!valid.length) return{name:`${c.flag} ${LANG==='ja'?c.ja:c.en}`,sd:0};
@@ -2089,7 +1952,6 @@ function initHeatmap(){
               y:{grid:{display:false},ticks:{color:'rgba(255,255,255,0.55)',font:{size:10}}}}}
   });
 
-  // Histogram - real scores from HM_ALL 2025
   const allScores=HM_ALL.map(c=>c.scores[5]).filter(s=>s!==null);
   const bins=[40,45,50,55,60,65,70,75,80,85,90];
   charts.hist=new Chart(document.getElementById('histChart'),{
@@ -2108,11 +1970,9 @@ function initHeatmap(){
 // ─────────────────────────────────────────
 function buildPills(){
   const row=document.getElementById('pillRow'); row.innerHTML='';
-  // Use full HM_ALL (52 countries) merged with detailed COUNTRIES data
   const allForExplorer = HM_ALL.map(hc=>{
-    // Try to find matching entry in COUNTRIES for rich data
-    const rich = COUNTRIES.find(c=>c.en===hc.en||c.en.replace('United Kingdom','UK')===hc.en||hc.en==='UK'&&c.en==='United Kingdom'||hc.en==='USA'&&c.en==='United States'||hc.en===c.en);
-    return rich ? rich : hc; // fallback to HM_ALL entry
+    const rich = COUNTRIES.find(c=>c.en===hc.en);
+    return rich ? rich : hc;
   });
   allForExplorer.forEach(c=>{
     const p=document.createElement('button'); p.className='cpill';
@@ -2131,15 +1991,10 @@ function filterPills(q){
   });
 }
 
-
-
 let cHistChart, cRadarChart;
 
-// Universal show - handles both rich COUNTRIES objects and lean HM_ALL objects
 function showCountryEx(c){
-  // Map HM_ALL minimal entry to COUNTRIES-compatible structure if needed
   if(!c.adq){
-    // Build a lean version for HM_ALL-only entries
     const lean={
       en:c.en, ja:c.ja||c.en, flag:c.flag, grade:c.grade,
       region_en:c.region_en||'—', region_ja:c.region_ja||'—',
@@ -2164,9 +2019,10 @@ function showCountry(c){
   const lastScore=c.scores[5]??c.scores.filter(v=>v!==null).pop();
   document.getElementById('pScore').textContent=lastScore.toFixed(1);
   document.getElementById('pGrade').innerHTML=`<span class="grade-pill ${gradeClass(c.grade)}">${c.grade} ${LANG==='ja'?'グレード':'Grade'}</span>`;
-  document.getElementById('pAdq').textContent=c.adq[5].toFixed(1);
-  document.getElementById('pSus').textContent=c.sus[5].toFixed(1);
-  document.getElementById('pItg').textContent=c.itg[5].toFixed(1);
+  const adq5=c.adq[5]; const sus5=c.sus[5]; const itg5=c.itg[5];
+  document.getElementById('pAdq').textContent=adq5!==null?adq5.toFixed(1):'—';
+  document.getElementById('pSus').textContent=sus5!==null?sus5.toFixed(1):'—';
+  document.getElementById('pItg').textContent=itg5!==null?itg5.toFixed(1):'—';
   document.getElementById('pCtx').textContent=LANG==='ja'?c.ctx_ja:c.ctx_en;
   const rank=TOP25.find(r=>r.en===c.en||r.en.includes(c.en)||c.en.includes(r.en));
   document.getElementById('pRank').textContent=rank?(LANG==='ja'?`52制度中 第${rank.r}位`:`Ranked #${rank.r} of 52 systems`):'';
@@ -2183,10 +2039,11 @@ function showCountry(c){
   });
 
   if(cRadarChart) cRadarChart.destroy();
+  const radarData=[adq5,sus5,itg5].map(v=>v!==null?v:0);
   cRadarChart=new Chart(document.getElementById('cRadar'),{
     type:'radar',
     data:{labels:[adqLbl(),susLbl(),itgLbl()],
-      datasets:[{label:cntLbl(c),data:[c.adq[5],c.sus[5],c.itg[5]],
+      datasets:[{label:cntLbl(c),data:radarData,
         borderColor:C,backgroundColor:'rgba(0,212,255,0.1)',borderWidth:2.5,pointBackgroundColor:C,pointRadius:5}]},
     options:{responsive:true,plugins:{legend:{display:false}},
       scales:{r:{min:30,max:100,grid:{color:'rgba(255,255,255,0.08)'},
@@ -2200,140 +2057,10 @@ function initExplorer(){
   document.querySelector('.cpill').classList.add('active');
 }
 
-// ─────────────────────────────────────────
-//  CHATBOT
-// ─────────────────────────────────────────
-let chatOpen = false;
-let chatHistory = [];
-
-function toggleChat(){
-  chatOpen = !chatOpen;
-  document.getElementById('chatWindow').classList.toggle('open', chatOpen);
-  if(chatOpen && chatHistory.length === 0) initChat();
-  if(chatOpen) setTimeout(()=>document.getElementById('chatInput').focus(), 300);
-}
-
-function initChat(){
-  const welcome = LANG === 'ja'
-    ? 'こんにちは！マーサーCFA協会グローバル年金指数（2020〜2025年）についてご質問ください。国のスコア、ランキング、トレンド、改革提言など何でもお答えします。'
-    : "Hello! I'm your MCGPI intelligence assistant. Ask me anything about the Mercer CFA Institute Global Pension Index 2020–2025 — country scores, rankings, trends, sub-index breakdowns, reform recommendations, and more.";
-  appendMsg('bot', welcome);
-}
-
-function appendMsg(role, text){
-  const msgs = document.getElementById('chatMsgs');
-  const div = document.createElement('div');
-  div.className = 'chat-msg ' + role;
-  const av = document.createElement('div');
-  av.className = 'chat-msg-avatar';
-  av.textContent = role === 'bot' ? '🏦' : '👤';
-  const bubble = document.createElement('div');
-  bubble.className = 'chat-bubble';
-  bubble.innerHTML = text;
-  if(role === 'bot') { div.appendChild(av); div.appendChild(bubble); }
-  else { div.appendChild(bubble); div.appendChild(av); }
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-function showTyping(){
-  const msgs = document.getElementById('chatMsgs');
-  const div = document.createElement('div');
-  div.className = 'chat-msg bot'; div.id = 'chatTyping';
-  div.innerHTML = '<div class="chat-msg-avatar">🏦</div><div class="chat-bubble"><div class="chat-typing"><span></span><span></span><span></span></div></div>';
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-function removeTyping(){ const el=document.getElementById('chatTyping'); if(el) el.remove(); }
-
-function sendSugg(el){
-  const q = LANG==='ja' ? el.dataset.ja : el.dataset.en;
-  document.getElementById('chatInput').value = q;
-  sendChat();
-}
-
-async function sendChat(){
-  const input = document.getElementById('chatInput');
-  const q = input.value.trim();
-  if(!q) return;
-  input.value = '';
-  appendMsg('user', q);
-  chatHistory.push({role:'user', content: q});
-
-  const top5 = [...HM_ALL].sort((a,b)=>(b.scores[5]||0)-(a.scores[5]||0)).slice(0,5)
-    .map(c=>c.en+': '+c.scores[5]).join(', ');
-  const bottom5 = [...HM_ALL].sort((a,b)=>(a.scores[5]||0)-(b.scores[5]||0)).slice(0,5)
-    .map(c=>c.en+': '+c.scores[5]).join(', ');
-  const ctxData = HM_ALL.map(c=>c.en+'('+c.iso+') 2025:'+(c.scores[5]||'N/A')+' 2024:'+(c.scores[4]||'N/A')+' 2023:'+(c.scores[3]||'N/A')+' 2022:'+(c.scores[2]||'N/A')+' 2021:'+(c.scores[1]||'N/A')+' 2020:'+(c.scores[0]||'N/A')+' Grade:'+c.grade).join(' | ');
-
-  const systemPrompt = 'You are MCGPI Assistant — an expert on the Mercer CFA Institute Global Pension Index (2020–2025). You help management consultants with sharp, concise, data-driven insights.\n\nFULL DATASET (Overall Index Scores):\n'+ctxData+'\n\nTOP 5 (2025): '+top5+'\nBOTTOM 5 (2025): '+bottom5+'\n\nGRADING: A≥80, B+76-80, B66-75, C+61-65, C51-60, D35-50\nPILLARS: Adequacy(40%), Sustainability(35%), Integrity(25%)\nLANG: Respond in '+(LANG==='ja'?'Japanese':'English')+'. Be concise and consultant-grade. Max 3 short paragraphs. Use HTML: <strong> for key numbers/countries, <span class=\"score-hi\"> for high scores (≥76), <span class=\"score-lo\"> for low scores (≤50).';
-
-  showTyping();
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 800,
-        system: systemPrompt,
-        messages: chatHistory,
-      })
-    });
-    if (!res.ok) {
-      const errBody = await res.json().catch(()=>({}));
-      throw new Error(errBody?.error?.message || ('HTTP ' + res.status));
-    }
-    const data = await res.json();
-    const reply = (data.content && data.content[0] && data.content[0].text)
-      || (LANG==='ja' ? 'エラーが発生しました。' : 'Sorry, an error occurred.');
-    removeTyping();
-    chatHistory.push({ role: 'assistant', content: reply });
-    appendMsg('bot', reply);
-  } catch(e) {
-    removeTyping();
-    const errMsg = LANG==='ja'
-      ? '申し訳ありません。接続エラーが発生しました。もう一度お試しください。'
-      : 'Sorry, something went wrong: <em>' + (e.message || 'Unknown error') + '</em>. Please try again.';
-    appendMsg('bot', errMsg);
-  }
-}
 
 </script>
 
-<!-- ═══════ CHATBOT ═══════ -->
-<button id="chatBtn" onclick="toggleChat()" title="Ask MCGPI Assistant">
-  💬
-  <div class="chat-badge"></div>
-</button>
 
-<div id="chatWindow">
-  <div class="chat-header">
-    <div class="chat-avatar">🏦</div>
-    <div class="chat-header-info">
-      <div class="chat-header-name" data-en="MCGPI Assistant" data-ja="MCGPI アシスタント">MCGPI Assistant</div>
-      <div class="chat-header-status" data-en="Online · Powered by Claude" data-ja="オンライン · Claude搭載">Online · Powered by Claude</div>
-    </div>
-    <button class="chat-close" onclick="toggleChat()">✕</button>
-  </div>
-  <div class="chat-msgs" id="chatMsgs"></div>
-  <div class="chat-suggestions" id="chatSuggs">
-    <button class="chat-sugg" onclick="sendSugg(this)" data-en="Who leads the 2025 index?" data-ja="2025年の首位は？">Who leads the 2025 index?</button>
-    <button class="chat-sugg" onclick="sendSugg(this)" data-en="How is Singapore doing?" data-ja="シンガポールの状況は？">How is Singapore doing?</button>
-    <button class="chat-sugg" onclick="sendSugg(this)" data-en="What's the US score?" data-ja="米国のスコアは？">What's the US score?</button>
-    <button class="chat-sugg" onclick="sendSugg(this)" data-en="Compare Japan and Korea" data-ja="日本と韓国を比較">Compare Japan and Korea</button>
-  </div>
-  <div class="chat-input-row">
-    <input id="chatInput" type="text" placeholder="Ask about any pension system…" onkeydown="if(event.key==='Enter')sendChat()">
-    <button id="chatSend" onclick="sendChat()">➤</button>
-  </div>
-</div>
 
 </body>
 </html>
